@@ -45,10 +45,11 @@ import org.springframework.data.repository.Repository;
  * @author Andy Wilkinson
  * @since 1.2.0
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.TYPE) // type表明可以修饰 类，接口，枚举
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
+// ---------主要是整合了以下的三个注解
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),

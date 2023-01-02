@@ -79,6 +79,7 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
+
 @AutoConfigurationPackage
 @Import(AutoConfigurationImportSelector.class)
 public @interface EnableAutoConfiguration {

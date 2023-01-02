@@ -88,6 +88,7 @@ public abstract class AutoConfigurationPackages {
 	 * configuration class or classes.
 	 * @param registry the bean definition registry
 	 * @param packageNames the package names to set
+	 * @param packageNames the package names to set
 	 */
 	public static void register(BeanDefinitionRegistry registry, String... packageNames) {
 		if (registry.containsBeanDefinition(BEAN)) {
@@ -97,7 +98,7 @@ public abstract class AutoConfigurationPackages {
 		}
 		else {
 			GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
-			beanDefinition.setBeanClass(BasePackages.class);
+			beanDefinition.setBeanClass(BasePackages.class); // 注册BasePackages
 			beanDefinition.getConstructorArgumentValues().addIndexedArgumentValue(0, packageNames);
 			beanDefinition.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
 			registry.registerBeanDefinition(BEAN, beanDefinition);
