@@ -41,9 +41,14 @@ import org.springframework.web.filter.CharacterEncodingFilter;
  * @since 2.0.0
  */
 @Configuration(proxyBeanMethods = false)
+// 完成springboot的属性注入可以通过@Vlaue和@ConfigurationProperties注入
+// 这个注解就是让HttpProperties的配置生效
 @EnableConfigurationProperties(HttpProperties.class)
+// 判断当前应用是否是web应用,如果是,当前配置类生效(导入tomcat相关的jar包,这个注解都会生效)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+// 判断当前项目是否有CharacterEncodingFilter类
 @ConditionalOnClass(CharacterEncodingFilter.class)
+// 判断配置文件中是否存在某个配置spring.http.encoding,如果不存在(没有配置 spring.http.encoding ),判断也是成立的
 @ConditionalOnProperty(prefix = "spring.http.encoding", value = "enabled", matchIfMissing = true)
 public class HttpEncodingAutoConfiguration {
 
