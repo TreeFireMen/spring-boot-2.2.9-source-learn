@@ -68,6 +68,7 @@ public enum WebApplicationType {
 				return WebApplicationType.NONE;
 			}
 		}
+		// 走这里
 		return WebApplicationType.SERVLET;
 	}
 

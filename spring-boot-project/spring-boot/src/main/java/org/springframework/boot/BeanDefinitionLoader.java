@@ -79,7 +79,9 @@ class BeanDefinitionLoader {
 		Assert.notNull(registry, "Registry must not be null");
 		Assert.notEmpty(sources, "Sources must not be empty");
 		this.sources = sources;
+		// 注解形式的bean定义读取器,比如: 读取 @Configuration @Bean @Component @Controller 等等
 		this.annotatedReader = new AnnotatedBeanDefinitionReader(registry);
+		// xml形式的bean定义读取器
 		this.xmlReader = new XmlBeanDefinitionReader(registry);
 		if (isGroovyPresent()) {
 			this.groovyReader = new GroovyBeanDefinitionReader(registry);
@@ -132,7 +134,9 @@ class BeanDefinitionLoader {
 
 	private int load(Object source) {
 		Assert.notNull(source, "Source must not be null");
+		// source是主类: run方法的主类
 		if (source instanceof Class<?>) {
+			// 从Class加载
 			return load((Class<?>) source);
 		}
 		if (source instanceof Resource) {
@@ -149,11 +153,14 @@ class BeanDefinitionLoader {
 
 	private int load(Class<?> source) {
 		if (isGroovyPresent() && GroovyBeanDefinitionSource.class.isAssignableFrom(source)) {
+			// 这个条件不满足,不会执行
 			// Any GroovyLoaders added in beans{} DSL can contribute beans here
 			GroovyBeanDefinitionSource loader = BeanUtils.instantiateClass(source, GroovyBeanDefinitionSource.class);
 			load(loader);
 		}
+		// 判断主类是否有标注@Component注解
 		if (isComponent(source)) {
+			// 将启动类的beanDefinition注册进beanDefinitionMap
 			this.annotatedReader.register(source);
 			return 1;
 		}
