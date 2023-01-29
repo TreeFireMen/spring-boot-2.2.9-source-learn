@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import javax.sql.DataSource;
 
+import com.hand.springbootdataaccess.pojo.Report;
 import com.hand.springbootdataaccess.pojo.SimpleBean;
+import com.hand.springbootdataaccess.service.ReportService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ class SpringbootDataaccessApplicationTests {
 	@Autowired
 	private SimpleBean simpleBean;
 
+	@Autowired
+	private ReportService reportService;
+
 	@Test
 	void contextLoads() throws SQLException {
 		Connection connection = dataSource.getConnection();
@@ -33,6 +39,11 @@ class SpringbootDataaccessApplicationTests {
 		resultSet.next();
 		System.out.println(resultSet.getString(2));
 
+	}
+
+	@Test
+	void findReport() {
+		reportService.findAllReport();
 	}
 
 }
