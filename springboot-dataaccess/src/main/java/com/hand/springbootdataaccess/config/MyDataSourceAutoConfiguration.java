@@ -1,6 +1,5 @@
 package com.hand.springbootdataaccess.config;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -24,6 +23,8 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class MyDataSourceAutoConfiguration {
 
+	public static final String MASTER = "master";
+	public static final String SLAVE = "slave";
 
 	Logger logger = LoggerFactory.getLogger(MyDataSourceAutoConfiguration.class);
 
@@ -62,8 +63,8 @@ public class MyDataSourceAutoConfiguration {
 		logger.info("create primary datasource");
 		RoutingDataSource routingDataSource = new RoutingDataSource();
 		Map<Object, Object> map = new HashMap<>();
-		map.put("master", masterDataSource);
-		map.put("slave", slaveDataSource);
+		map.put(MASTER, masterDataSource);
+		map.put(SLAVE, slaveDataSource);
 		routingDataSource.setTargetDataSources(map);
 		return routingDataSource;
 	}

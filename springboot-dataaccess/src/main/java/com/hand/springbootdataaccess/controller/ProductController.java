@@ -1,5 +1,7 @@
 package com.hand.springbootdataaccess.controller;
 
+import com.hand.springbootdataaccess.config.MyDataSourceAutoConfiguration;
+import com.hand.springbootdataaccess.config.RoutingDataSourceContext;
 import com.hand.springbootdataaccess.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,18 +20,17 @@ public class ProductController {
 
 	@RequestMapping("/findAllM")
 	public String findAllM() {
+		new RoutingDataSourceContext(MyDataSourceAutoConfiguration.MASTER);
 		productService.findAllProductM();
 		return "m";
 	}
 
 	@RequestMapping("/findAllS")
 	public String findAllS() {
+		new RoutingDataSourceContext(MyDataSourceAutoConfiguration.SLAVE);
 		productService.findAllProductS();
 		return "s";
 	}
-
-
-
 
 
 }
