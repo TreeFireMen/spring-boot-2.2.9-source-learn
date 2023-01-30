@@ -3,7 +3,9 @@ package com.hand.observe.event;
 import com.hand.observe.bean.Order;
 import org.springframework.context.ApplicationEvent;
 
-/** 事件
+/**
+ * 事件
+ *
  * @author zijian.zeng@hand-china.com
  * @since 2023-01-30
  */
