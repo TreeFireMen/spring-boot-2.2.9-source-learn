@@ -3,6 +3,7 @@ package com.hand.springboot_cache.service;
 import com.hand.springboot_cache.entity.Employee;
 import com.hand.springboot_cache.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,12 @@ public class EmployeeService {
 	public Employee updateEmp(Employee employee) {
 		employeeMapper.updateEmp(employee);
 		return employee;
+	}
+
+
+	@CacheEvict(cacheNames = {"emp"}, key = "#id", beforeInvocation = true)
+	public void deleteEmp(int id) {
+		employeeMapper.deleteEmpById(id);
 	}
 
 

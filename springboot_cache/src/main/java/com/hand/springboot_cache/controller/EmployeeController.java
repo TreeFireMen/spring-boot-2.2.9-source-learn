@@ -4,6 +4,7 @@ import com.hand.springboot_cache.entity.Employee;
 import com.hand.springboot_cache.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,5 +31,10 @@ public class EmployeeController {
 	@PutMapping("/emp")
 	public Employee updateEmp(@RequestBody Employee employee) {
 		return employeeService.updateEmp(employee);
+	}
+
+	@DeleteMapping("/emp/{id}")
+	public void delEmp(@PathVariable("id") Integer id) {
+		employeeService.deleteEmp(id);
 	}
 }
