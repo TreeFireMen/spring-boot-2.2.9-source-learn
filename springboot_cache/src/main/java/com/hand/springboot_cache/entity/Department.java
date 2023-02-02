@@ -1,10 +1,12 @@
 package com.hand.springboot_cache.entity;
 
+import java.io.Serializable;
+
 /**
  * @author zijian.zeng@hand-china.com
  * @since 2023-02-01
  */
-public class Department {
+public class Department implements Serializable {
 
 	private int id;
 	private String departmentName;
