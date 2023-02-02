@@ -3,6 +3,7 @@ package com.hand.springboot_cache.service;
 import com.hand.springboot_cache.entity.Employee;
 import com.hand.springboot_cache.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
  * @since 2023-02-01
  */
 @Service
+@CacheConfig(cacheNames = {"emp"})
 public class EmployeeService {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class EmployeeService {
 	 *                      (2) sync的值为true的时候,unless 不被支持
 	 * @Cacheable : 缓存查询：会将该方法的返回值存到缓存中
 	 */
-	@Cacheable(cacheNames = {"emp"}, key = "#id", condition = "#id > 0", unless = "#result == null")
+	@Cacheable( key = "#id", condition = "#id > 0", unless = "#result == null")
 	public Employee getEmpById(int id) {
 		return employeeMapper.getEmpById(id);
 	}
@@ -40,14 +42,14 @@ public class EmployeeService {
 	/**
 	 * @Cacheput : 需要和更新的缓存的名称相同, key也需要相同,不指定key的话默认使用employee对象作为key
 	 */
-	@CachePut(cacheNames = {"emp"}, key = "#employee.id")
+	@CachePut( key = "#employee.id")
 	public Employee updateEmp(Employee employee) {
 		employeeMapper.updateEmp(employee);
 		return employee;
 	}
 
 
-	@CacheEvict(cacheNames = {"emp"}, key = "#id", beforeInvocation = true)
+	@CacheEvict( key = "#id", beforeInvocation = true)
 	public void deleteEmp(int id) {
 		employeeMapper.deleteEmpById(id);
 	}
