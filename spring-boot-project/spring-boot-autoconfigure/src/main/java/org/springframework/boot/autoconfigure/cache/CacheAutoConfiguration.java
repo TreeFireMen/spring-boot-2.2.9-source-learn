@@ -60,6 +60,7 @@ import org.springframework.util.Assert;
 @ConditionalOnClass(CacheManager.class)
 @ConditionalOnBean(CacheAspectSupport.class)
 @ConditionalOnMissingBean(value = CacheManager.class, name = "cacheResolver")
+// 再次解释下@EnableConfigurationProperties的作用:使CacheProperties.class中的@ConfigurationProperties注解生效
 @EnableConfigurationProperties(CacheProperties.class)
 @AutoConfigureAfter({ CouchbaseAutoConfiguration.class, HazelcastAutoConfiguration.class,
 		HibernateJpaAutoConfiguration.class, RedisAutoConfiguration.class })
