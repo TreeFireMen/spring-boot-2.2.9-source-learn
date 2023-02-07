@@ -38,6 +38,18 @@
 			<artifactId>zzj-spring-boot-stater</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/ognl/ognl -->
+		<dependency>
+			<groupId>ognl</groupId>
+			<artifactId>ognl</artifactId>
+			<version>3.2.11</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.83</version>
+		</dependency>
 	</dependencies>
 
 	<build>
