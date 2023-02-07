@@ -1,0 +1,21 @@
+info:
+  name: zz
+  age: 222
+  phone: 136xxxxx
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8081
+  application:
+    name: spring-boot-admin-client
